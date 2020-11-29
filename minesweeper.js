@@ -230,7 +230,9 @@ function checkForWin() {
   // You can use this function call to declare a winner (once you've
   // detected that they've won, that is!)
   if (totalSquares == (totalMines + totalUnHidden) && totalMarked == totalMines) {
+    var sound = document.getElementById('wonAudio')
     lib.displayMessage('You win!')
+    sound.play();
   }
 }
 
