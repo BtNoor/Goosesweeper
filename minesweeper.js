@@ -312,6 +312,7 @@ function resetBoard() {
     board.cells[i].hidden = true;
   }
   startGame()
+  playSound()
 }
 
 function newLayout() {
