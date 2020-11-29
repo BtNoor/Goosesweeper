@@ -62,7 +62,7 @@ var board = {
     {
       row: 1,
       col: 3,
-      isMine: false,
+      isMine: true,
       hidden: true,
       isMarked: false,
     },
@@ -104,7 +104,7 @@ var board = {
     {
       row: 2,
       col: 4,
-      isMine: false,
+      isMine: true,
       hidden: true,
       isMarked: false,
     },
@@ -125,7 +125,7 @@ var board = {
     {
       row: 3,
       col: 2,
-      isMine: false,
+      isMine: true,
       hidden: true,
       isMarked: false,
     },
@@ -249,7 +249,7 @@ function countSurroundingMines(cell) {
 
 function boardSize(colSize, rowSize, mineNumber) {
 
-  board = { cells: []}
+  board = { cells: [] }
 
   var gameContainerCount = document.getElementById('board').childElementCount
   var gameContainer = document.getElementById('board')
@@ -283,16 +283,16 @@ function boardSize(colSize, rowSize, mineNumber) {
   startGame()
 }
 
-function userSubmitSize () {
+function userSubmitSize() {
 
   var newColumns = document.getElementById('newColumns').value;
-  var newRows = document.getElementById('newRows').value;
+  var newRows = newColumns;
   var newMines = document.getElementById('mineNumber').value;
   boardSize(newColumns, newRows, newMines);
 
 }
 
-function resetBoard () {
+function resetBoard() {
 
   var gameContainerCount = document.getElementById('board').childElementCount
   var gameContainer = document.getElementById('board')
@@ -307,7 +307,28 @@ function resetBoard () {
   startGame()
 }
 
-function playSound () {
+function newLayout() {
+
+  var getRows = 0;
+  var updateRows = 0;
+  var getMines = 0;
+
+  for (var i = 0; i < board.cells.length; i++) {
+    if (board.cells[i].row > getRows) {
+      updateRows = board.cells[i].row + 1;
+    }
+  }
+
+  for (var j = 0; j < board.cells.length; j++) {
+    if (board.cells[j].isMine == true) {
+      getMines += 1;
+      console.log(getMines)
+    }
+  }
+  boardSize(updateRows, updateRows, getMines);
+}
+
+function playSound() {
   for (var i = 0; i < board.cells.length; i++) {
     if (board.cells[i].hidden == false && board.cells[i].isMine == true) {
       var sound = document.getElementById('mineHit');
