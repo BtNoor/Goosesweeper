@@ -182,12 +182,15 @@ var board = {
 }
 
 function startGame() {
-  addEventListener('click', checkForWin)
   for (var i = 0; i < board.cells.length; i++) {
     countSurroundingMines(board.cells[i])
   }
   // Don't remove this function call: it makes the game work!
   lib.initBoard()
+
+  addEventListener('click', checkForWin)
+  addEventListener('click', playSound)
+
 }
 
 
@@ -302,4 +305,19 @@ function resetBoard () {
     board.cells[i].hidden = true;
   }
   startGame()
+}
+
+function playSound () {
+  for (var i = 0; i < board.cells.length; i++) {
+    if (board.cells[i].hidden == false && board.cells[i].isMine == true) {
+      var sound = document.getElementById('mineHit');
+
+      sound.play();
+      
+    } else if (board.cells[i].hidden == false && board.cells[i].isMine == false) {
+      var sound = document.getElementById('noMine');
+
+      sound.play();
+    }
+  }
 }

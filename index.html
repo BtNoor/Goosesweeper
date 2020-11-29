@@ -2,7 +2,8 @@
 <html>
 
 <head>
-  <title>Minesweeper</title>
+  <link rel="shortcut icon" href="#">
+  <title>Goosesweeper</title>
   <link rel="stylesheet" href="minesweeper.css">
   <script src="lib/tests.js"></script>
   <script src="lib/lib.js"></script>
@@ -22,6 +23,10 @@
   <button id='reset' onclick='resetBoard()'>Reset The Board</button>
   <div class="board" id='board'></div>
   <script src="minesweeper.js"></script>
+
+  <audio id='noMine' src="/sound/mine_Correct.mp3"></audio>
+
+  <audio id='mineHit' src="/sound/bomb_Hit.mp3"></audio>
 </body>
 
 </html>
