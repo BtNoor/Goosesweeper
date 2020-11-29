@@ -58,3 +58,8 @@ div.hidden:hover {
 div.marked, div.marked:hover {
   background: no-repeat center/60% url("images/mark.svg") deepskyblue;
 }
+
+#reset {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}

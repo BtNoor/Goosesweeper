@@ -189,10 +189,10 @@ function startGame() {
   lib.initBoard()
 
   addEventListener('click', checkForWin)
-  addEventListener('click', playSound)
 
 }
 
+document.getElementById('board').addEventListener('click', playSound);
 
 // Define this function to look for a win condition:
 //
@@ -313,7 +313,7 @@ function playSound () {
       var sound = document.getElementById('mineHit');
 
       sound.play();
-      
+
     } else if (board.cells[i].hidden == false && board.cells[i].isMine == false) {
       var sound = document.getElementById('noMine');
 
