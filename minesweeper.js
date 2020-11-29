@@ -188,7 +188,10 @@ function startGame() {
   // Don't remove this function call: it makes the game work!
   lib.initBoard()
 
+  checkForWin()
+
   addEventListener('click', checkForWin)
+  addEventListener('contextmenu', checkForWin)
 
 }
 
@@ -204,6 +207,7 @@ function checkForWin() {
   let totalMines = 0;
   let totalUnHidden = 0;
   let totalHidden = 0;
+  let totalMarked = 0;
   let minesHit = false;
 
   for (var i = 0; i < board.cells.length; i++) {
@@ -211,16 +215,19 @@ function checkForWin() {
       totalUnHidden += 1;
     } else if (board.cells[i].isMine == false && board.cells[i].hidden == true) {
       totalHidden += 1;
-    } else if (board.cells[i].isMine == true && board.cells[i].hidden == true) {
+    } else if (board.cells[i].isMine == true && board.cells[i].hidden == true && board.cells[i].isMarked == true) {
       totalMines += 1;
+      totalMarked += 1
     } else if (board.cells[i].isMine == true && board.cells[i].hidden == false) {
       minesHit = true;
     }
   }
 
+    document.getElementById('squaresLeft').innerHTML = totalHidden
+
   // You can use this function call to declare a winner (once you've
   // detected that they've won, that is!)
-  if (totalSquares == (totalMines + totalUnHidden)) {
+  if (totalSquares == (totalMines + totalUnHidden) && totalMarked == totalMines) {
     lib.displayMessage('You win!')
   }
 }
@@ -324,6 +331,11 @@ function newLayout() {
       getMines += 1;
     }
   }
+
+  if (getMines == 0) {
+    getMines = 5;
+  }
+
   boardSize(updateRows, updateRows, getMines);
 }
 
