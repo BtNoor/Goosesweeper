@@ -218,6 +218,8 @@ function checkForWin() {
     } else if (board.cells[i].isMine == true && board.cells[i].hidden == true && board.cells[i].isMarked == true) {
       totalMines += 1;
       totalMarked += 1
+    } else if (board.cells[i].isMine == true && board.cells[i].hidden == true) {
+      totalMines += 1;
     } else if (board.cells[i].isMine == true && board.cells[i].hidden == false) {
       minesHit = true;
     }
@@ -288,6 +290,7 @@ function boardSize(colSize, rowSize, mineNumber) {
   }
 
   startGame()
+  playSound()
 }
 
 function userSubmitSize() {
