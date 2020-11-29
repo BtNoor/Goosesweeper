@@ -322,7 +322,6 @@ function newLayout() {
   for (var j = 0; j < board.cells.length; j++) {
     if (board.cells[j].isMine == true) {
       getMines += 1;
-      console.log(getMines)
     }
   }
   boardSize(updateRows, updateRows, getMines);
