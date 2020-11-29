@@ -13,7 +13,7 @@ var board = {
     {
       row: 0,
       col: 1,
-      isMine: false,
+      isMine: true,
       hidden: true,
       isMarked: false,
     },
@@ -182,6 +182,7 @@ var board = {
 }
 
 function startGame() {
+  addEventListener('click', checkForWin)
   for (var i = 0; i < board.cells.length; i++) {
     countSurroundingMines(board.cells[i])
   }
@@ -209,15 +210,10 @@ function checkForWin() {
       totalHidden += 1;
     } else if (board.cells[i].isMine == true && board.cells[i].hidden == true) {
       totalMines += 1;
-    } else if ( board.cells[i].isMine == true && board.cells[i].hidden == false) {
+    } else if (board.cells[i].isMine == true && board.cells[i].hidden == false) {
       minesHit = true;
     }
   }
-
-  // console.log("Mines = " + totalMines)
-  // console.log("Hidden = " + totalHidden)
-  // console.log("Unhidden = " + totalUnHidden)
-  // console.log(minesHit)
 
   // You can use this function call to declare a winner (once you've
   // detected that they've won, that is!)
@@ -234,6 +230,7 @@ function checkForWin() {
 //
 // It will return cell objects in an array. You should loop through 
 // them, counting the number of times `cell.isMine` is true.
+
 function countSurroundingMines(cell) {
   var surrounding = lib.getSurroundingCells(cell.row, cell.col);
   var checkMineTotal = 0;
@@ -241,9 +238,68 @@ function countSurroundingMines(cell) {
   for (var i = 0; i < surrounding.length; i++) {
     if (surrounding[i].isMine == true) {
       checkMineTotal += 1;
-    } 
-  } 
+    }
+  }
   cell['surroundingMines'] = checkMineTotal
 }
 
-document.getElementById('board').addEventListener('click', checkForWin)
+
+function boardSize(colSize, rowSize, mineNumber) {
+
+  board = { cells: []}
+
+  var gameContainerCount = document.getElementById('board').childElementCount
+  var gameContainer = document.getElementById('board')
+
+  for (var removeCounter = 0; removeCounter < gameContainerCount; removeCounter++) {
+    gameContainer.removeChild(gameContainer.childNodes[0])
+  }
+
+  totalPieces = (colSize * rowSize)
+  var totalPiecesCounter = 0;
+
+  for (var colCounter = 0; colCounter < colSize; colCounter++) {
+    for (var rowCounter = 0; rowCounter < rowSize && totalPiecesCounter < totalPieces; totalPiecesCounter++, rowCounter++) {
+      board.cells[totalPiecesCounter] = {
+        row: rowCounter,
+        col: colCounter,
+        isMine: false,
+        hidden: true,
+        isMarked: false
+      }
+    }
+  }
+
+  var mineCounter = 0;
+
+  for (mineCounter = 0; mineCounter < mineNumber; mineCounter++) {
+    let randNumber = (Math.round(Math.random() * board.cells.length));
+    board.cells[randNumber].isMine = true;
+  }
+
+  startGame()
+}
+
+function userSubmitSize () {
+
+  var newColumns = document.getElementById('newColumns').value;
+  var newRows = document.getElementById('newRows').value;
+  var newMines = document.getElementById('mineNumber').value;
+  boardSize(newColumns, newRows, newMines);
+
+}
+
+function resetBoard () {
+
+  var gameContainerCount = document.getElementById('board').childElementCount
+  var gameContainer = document.getElementById('board')
+
+  for (var removeCounter = 0; removeCounter < gameContainerCount; removeCounter++) {
+    gameContainer.removeChild(gameContainer.childNodes[0])
+  }
+
+  for (var i = 0; i < board.cells.length; i++) {
+    board.cells[i].hidden = true;
+  }
+  startGame()
+}
