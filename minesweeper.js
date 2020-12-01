@@ -342,7 +342,7 @@ function newLayout() {
     }
   }
 
-  if (getMines == 0) {
+  if (getMines >= 2) {
     getMines = 5;
   }
 
