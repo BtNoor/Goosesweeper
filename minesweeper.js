@@ -359,3 +359,5 @@ function playSound() {
     }
   }
 }
+
+setTimeout(newLayout, 100)
