@@ -286,9 +286,13 @@ function boardSize(colSize, rowSize, mineNumber) {
 
   var mineCounter = 0;
 
-  for (mineCounter = 0; mineCounter < mineNumber; mineCounter++) {
+  try {
+    for (mineCounter = 0; mineCounter < mineNumber; mineCounter++) {
     let randNumber = (Math.round(Math.random() * board.cells.length));
     board.cells[randNumber].isMine = true;
+  }} catch {
+    setTimeout(boardSize(colSize, rowSize, mineNumber), 100)
+
   }
 
   startGame()
