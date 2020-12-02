@@ -225,7 +225,7 @@ function checkForWin() {
     }
   }
 
-    document.getElementById('squaresLeft').innerHTML = totalHidden
+  document.getElementById('squaresLeft').innerHTML = totalHidden
 
   // You can use this function call to declare a winner (once you've
   // detected that they've won, that is!)
@@ -288,10 +288,11 @@ function boardSize(colSize, rowSize, mineNumber) {
 
   try {
     for (mineCounter = 0; mineCounter < mineNumber; mineCounter++) {
-    let randNumber = (Math.round(Math.random() * board.cells.length));
-    board.cells[randNumber].isMine = true;
-  }} catch {
-    setTimeout(boardSize(colSize, rowSize, mineNumber), 100)
+      let randNumber = (Math.round(Math.random() * board.cells.length));
+      board.cells[randNumber].isMine = true;
+    }
+  } catch {
+    setTimeout(newLayout, 500)
 
   }
 
