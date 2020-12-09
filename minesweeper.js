@@ -192,10 +192,10 @@ function startGame() {
 
   addEventListener('click', checkForWin)
   addEventListener('contextmenu', checkForWin)
+  document.getElementById('board').addEventListener('click', playSound);
 
 }
 
-document.getElementById('board').addEventListener('click', playSound);
 
 // Define this function to look for a win condition:
 //
@@ -297,7 +297,6 @@ function boardSize(colSize, rowSize, mineNumber) {
   }
 
   startGame()
-  playSound()
 }
 
 function userSubmitSize() {
@@ -322,7 +321,6 @@ function resetBoard() {
     board.cells[i].hidden = true;
   }
   startGame()
-  playSound()
 }
 
 function newLayout() {
