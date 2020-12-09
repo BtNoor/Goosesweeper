@@ -197,6 +197,7 @@ function startGame() {
 
 function checkForWin() {
 
+//might do something with these extra variables later
   let totalSquares = board.cells.length;
   let totalMines = 0;
   let totalUnHidden = 0;
@@ -220,6 +221,8 @@ function checkForWin() {
   }
 
   document.getElementById('squaresLeft').innerHTML = totalHidden
+
+  document.getElementById('minesLeft').innerHTML = totalMines
 
   if (totalSquares == (totalMines + totalUnHidden) && totalMarked == totalMines) {
     var sound = document.getElementById('wonAudio')
